@@ -1,5 +1,9 @@
 # Strimzi Insight Plugin for Headlamp
 
+[![CI](https://github.com/LOQ/headlamp-strimzi-insight/actions/workflows/ci.yml/badge.svg)](https://github.com/LOQ/headlamp-strimzi-insight/actions/workflows/ci.yml)
+[![Version](https://img.shields.io/github/v/release/LOQ/headlamp-strimzi-insight)](https://github.com/LOQ/headlamp-strimzi-insight/releases)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 Strimzi Insight is a production-grade [Headlamp](https://kinvolk.github.io/headlamp/) plugin designed for deep visualization and operational management of Strimzi-managed Kafka clusters on Kubernetes. It transforms raw Custom Resource Definitions (CRDs) into a structured, SRE-focused control plane.
 
 ## Why it Exists
