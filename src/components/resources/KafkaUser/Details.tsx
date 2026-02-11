@@ -29,7 +29,7 @@ import { makeKafkaUrl, getParentClusterName } from '../../../navigation/links';
 const userClient = apiFactory.getUserClient();
 
 export const KafkaUserDetails: React.FC = () => {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const { namespace = '', name = '' } = useParams<{ namespace: string; name: string }>();
   const { item: user, loading, error, refresh } = useKafkaUserDetails(namespace, name);
   const [actionLoading, setActionLoading] = React.useState(false);
 
@@ -37,6 +37,7 @@ export const KafkaUserDetails: React.FC = () => {
     if (!window.confirm('Trigger Strimzi credential rotation for this user? This will re-issue secrets.')) return;
     setActionLoading(true);
     try {
+      if (!namespace || !name) return;
       await userClient.regenerateCredentials(namespace, name);
       await refresh();
     } finally {
@@ -55,7 +56,7 @@ export const KafkaUserDetails: React.FC = () => {
     <Box p={3} style={{ backgroundColor: '#fdfdfd', height: '100%' }}>
       {/* Header Bar */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-        <Box display="flex" alignItems="center" gap={2}>
+        <Box display="flex" alignItems="center" style={{ gap: '16px' }}>
           <Button
             component={RouterLink}
             to="/kafka-users"
@@ -66,7 +67,7 @@ export const KafkaUserDetails: React.FC = () => {
             Users
           </Button>
           <Box>
-            <Box display="flex" alignItems="center" gap={1}>
+            <Box display="flex" alignItems="center" style={{ gap: '8px' }}>
               <Typography variant="h5" style={{ fontWeight: 700 }}>{user.metadata?.name}</Typography>
               <StatusIndicator conditions={user.status?.conditions} />
             </Box>
@@ -100,7 +101,7 @@ export const KafkaUserDetails: React.FC = () => {
             {[
               { label: 'Authentication', value: <Chip label={user.spec?.authentication?.type || 'none'} size="small" /> },
               { label: 'Associated Cluster', value: clusterName ? (
-                  <Link component={RouterLink} to={makeKafkaUrl(user.metadata.namespace, clusterName)} style={{ fontWeight: 600 }}>
+                  <Link component={RouterLink} to={makeKafkaUrl(user.metadata.namespace || '', clusterName)} style={{ fontWeight: 600 }}>
                     {clusterName}
                   </Link>
                 ) : 'standalone' 
@@ -124,7 +125,7 @@ export const KafkaUserDetails: React.FC = () => {
         <Grid item xs={12} md={8}>
           <Card variant="outlined" style={{ borderRadius: 4, marginBottom: 16 }}>
             <CardContent>
-              <Typography variant="subtitle2" style={{ fontWeight: 600, mb: 1.5, display: 'block' }}>
+              <Typography variant="subtitle2" style={{ fontWeight: 600, marginBottom: 12, display: 'block' }}>
                 Access Control Matrix (ACLs)
               </Typography>
               {user.spec?.authorization?.acls ? (
@@ -137,7 +138,7 @@ export const KafkaUserDetails: React.FC = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {user.spec.authorization.acls.map((acl, idx: number) => (
+                    {user.spec.authorization.acls.map((acl: any, idx: number) => (
                       <TableRow key={idx}>
                         <TableCell>
                           <Typography variant="body2" style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>
@@ -164,7 +165,7 @@ export const KafkaUserDetails: React.FC = () => {
 
           <Card variant="outlined" style={{ borderRadius: 4 }}>
             <CardContent>
-              <Typography variant="subtitle2" style={{ fontWeight: 600, mb: 1.5, display: 'block' }}>
+              <Typography variant="subtitle2" style={{ fontWeight: 600, marginBottom: 12, display: 'block' }}>
                 Condition Log
               </Typography>
               <ConditionTable conditions={user.status?.conditions} />

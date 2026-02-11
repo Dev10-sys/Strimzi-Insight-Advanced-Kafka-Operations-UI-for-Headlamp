@@ -1,5 +1,6 @@
-import { apiProxy } from '@kinvolk/headlamp-plugin/lib';
-import { KubeObjectInterface } from '@kinvolk/headlamp-plugin/lib/k8s/cluster';
+import { ApiProxy, K8s } from '@kinvolk/headlamp-plugin/lib';
+
+type KubeObjectInterface = K8s.cluster.KubeObjectInterface;
 import {
   ApiResponse,
   ApiError,
@@ -72,7 +73,7 @@ export class KubernetesApiClient<T extends KubeObjectInterface> {
     body?: unknown
   ): Promise<ApiResponse<R>> {
     try {
-      const response = await apiProxy(url, {
+      const response = await ApiProxy.request(url, {
         method,
         headers: {
           'Content-Type': 'application/json',
@@ -133,7 +134,7 @@ export class KubernetesApiClient<T extends KubeObjectInterface> {
     };
 
     try {
-      const response = await apiProxy(url, {
+      const response = await ApiProxy.request(url, {
         method: 'PATCH',
         headers,
         body: JSON.stringify(patch),

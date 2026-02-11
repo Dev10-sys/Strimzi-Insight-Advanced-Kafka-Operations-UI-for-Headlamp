@@ -121,7 +121,7 @@ export const KafkaTopicCreate: React.FC<{ onSuccess?: () => void }> = ({ onSucce
           labels: {
             'strimzi.io/cluster': 'my-cluster', // Ideally this should be selectable or inferred
           },
-        },
+        } as any,
         spec: {
           partitions: Number(form.partitions),
           replicas: Number(form.replicas),

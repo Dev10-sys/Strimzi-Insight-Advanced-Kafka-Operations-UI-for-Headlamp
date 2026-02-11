@@ -1,5 +1,7 @@
 import React from 'react';
-import { KubeObjectInterface } from '@kinvolk/headlamp-plugin/lib/k8s/cluster';
+import { K8s } from "@kinvolk/headlamp-plugin/lib";
+
+type KubeObjectInterface = K8s.cluster.KubeObjectInterface;
 import { KubernetesApiClient } from '../api/client';
 import { ApiResponse, QueryOptions } from '../types/api';
 

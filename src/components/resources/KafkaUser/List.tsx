@@ -89,13 +89,13 @@ export const KafkaUserList: React.FC = () => {
                   </TableCell>
                   <TableCell style={styles.cell}>
                     {clusterName ? (
-                      <Link component={RouterLink} to={makeKafkaUrl(user.metadata.namespace, clusterName)}>
+                      <Link component={RouterLink} to={makeKafkaUrl(user.metadata.namespace || '', clusterName)}>
                         {clusterName}
                       </Link>
                     ) : '-'}
                   </TableCell>
                   <TableCell style={styles.cell}>
-                    <Chip label={user.spec.authentication.type} size="small" style={{ fontSize: '0.7rem' }} />
+                    <Chip label={user.spec?.authentication?.type || 'unknown'} size="small" style={{ fontSize: '0.7rem' }} />
                   </TableCell>
                   <TableCell style={styles.cell}>
                     <StatusIndicator conditions={user.status?.conditions} />

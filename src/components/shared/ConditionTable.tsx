@@ -44,7 +44,7 @@ export const ConditionTable: React.FC<ConditionTableProps> = ({
             <TableRow key={index}>
               <TableCell>{condition.type}</TableCell>
               <TableCell>
-                <StatusIndicator status={condition.status} withLabel={true} />
+                <StatusIndicator status={condition.status} />
               </TableCell>
               <TableCell>{formatConditionDate(condition.lastTransitionTime)}</TableCell>
               <TableCell>{condition.reason || '-'}</TableCell>

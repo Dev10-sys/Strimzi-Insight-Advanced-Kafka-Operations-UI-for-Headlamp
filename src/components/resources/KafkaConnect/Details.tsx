@@ -28,12 +28,12 @@ import { KafkaConnector } from '../../../types/crds';
 const connectorClient = apiFactory.getConnectorClient();
 
 export const KafkaConnectDetails: React.FC = () => {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const { namespace = '', name = '' } = useParams<{ namespace: string; name: string }>();
   const { item: connect, loading, error } = useKafkaConnectDetails(namespace, name);
 
   const relatedOptions = React.useMemo(() => ({
     namespace,
-    labelSelector: `strimzi.io/cluster=${name}`,
+    labelSelector: name ? `strimzi.io/cluster=${name}` : '',
   }), [namespace, name]);
 
   const { items: connectors, loading: connectorsLoading } = useResourceList(connectorClient, relatedOptions);
@@ -77,11 +77,11 @@ export const KafkaConnectDetails: React.FC = () => {
               </Box>
               <Box mb={2}>
                 <Typography variant="caption" color="textSecondary">Bootstrap Servers</Typography>
-                <Typography variant="body2" style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{connect.spec.bootstrapServers}</Typography>
+                <Typography variant="body2" style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{connect.spec?.bootstrapServers || '-'}</Typography>
               </Box>
               <Box mb={2}>
                 <Typography variant="caption" color="textSecondary">Replicas</Typography>
-                <Typography variant="body1" style={{ fontWeight: 600 }}>{connect.status?.replicas ?? 0} / {connect.spec.replicas}</Typography>
+                <Typography variant="body1" style={{ fontWeight: 600 }}>{connect.status?.replicas ?? 0} / {connect.spec?.replicas || 0}</Typography>
               </Box>
               {connect.status?.url && (
                 <Box mb={2}>

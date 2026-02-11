@@ -17,7 +17,7 @@ import {
 export interface RouteConfigItem {
   path: string;
   exact?: boolean;
-  component: React.ComponentType<unknown>;
+  component: React.ComponentType<any>;
   sidebar?: string;
 }
 

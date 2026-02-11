@@ -20,7 +20,6 @@ import {
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { useKafkaTopicList } from '../../../hooks/useKafkaTopic';
 import { StatusIndicator } from '../../shared/StatusIndicator';
-import { StatusIndicator } from '../../shared/StatusIndicator';
 import { makeKafkaUrl, getParentClusterName } from '../../../navigation/links';
 import { KafkaTopic } from '../../../types/crds';
 
@@ -91,16 +90,16 @@ export const KafkaTopicList: React.FC = () => {
                   </TableCell>
                   <TableCell style={styles.cell}>
                     {clusterName ? (
-                      <Link component={RouterLink} to={makeKafkaUrl(topic.metadata.namespace, clusterName)}>
+                      <Link component={RouterLink} to={makeKafkaUrl(topic.metadata.namespace || '', clusterName)}>
                         {clusterName}
                       </Link>
                     ) : '-'}
                   </TableCell>
                   <TableCell style={styles.cell} align="center">
-                    <Typography style={styles.mono}>{topic.spec.partitions}</Typography>
+                    <Typography style={styles.mono}>{topic.spec?.partitions ?? '-'}</Typography>
                   </TableCell>
                   <TableCell style={styles.cell} align="center">
-                    <Typography style={styles.mono}>{topic.spec.replicas}</Typography>
+                    <Typography style={styles.mono}>{topic.spec?.replicas ?? '-'}</Typography>
                   </TableCell>
                   <TableCell style={styles.cell}>
                     <StatusIndicator conditions={topic.status?.conditions} />

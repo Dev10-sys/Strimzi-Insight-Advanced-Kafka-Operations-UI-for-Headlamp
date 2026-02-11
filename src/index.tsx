@@ -1,4 +1,4 @@
-import { registerPlugin } from '@kinvolk/headlamp-plugin/lib';
+import { Headlamp, Plugin, registerSidebarEntry, registerRoute } from '@kinvolk/headlamp-plugin/lib';
 import { routeConfig } from './navigation/config';
 
 /**
@@ -12,24 +12,35 @@ import { routeConfig } from './navigation/config';
  * 4. Presentation Layer (src/components)
  */
 
-const sidebarItems = routeConfig
-  .filter(route => route.sidebar)
-  .map(route => ({
-    name: route.sidebar || '',
-    path: route.path,
-    icon: 'mdi-kafka', // Default icon for the suite
-  }));
+class StrimziInsightPlugin extends Plugin {
+  initialize() {
+    // Register sidebar items
+    const sidebarItems = routeConfig.filter(route => route.sidebar);
 
-registerPlugin({
-  name: 'strimzi-insight',
-  displayName: 'Strimzi Insight',
-  version: '0.1.0',
-  components: {
-    sidebarItems,
-    routes: routeConfig.map(({ path, component, exact }) => ({
-      path,
-      component,
-      exact,
-    })),
-  },
-});
+    sidebarItems.forEach(route => {
+      if (route.sidebar) {
+        registerSidebarEntry({
+          parent: 'cluster',
+          name: route.sidebar,
+          label: route.sidebar,
+          url: route.path,
+          icon: 'mdi:kafka', // Using standard format, assuming mdi bundle
+        });
+      }
+    });
+
+    // Register routes
+    routeConfig.forEach((route) => {
+      registerRoute({
+        path: route.path,
+        component: () => <route.component />,
+        sidebar: route.sidebar || null,
+        exact: route.exact,
+      });
+    });
+
+    return true;
+  }
+}
+
+Headlamp.registerPlugin('strimzi-insight', new StrimziInsightPlugin());

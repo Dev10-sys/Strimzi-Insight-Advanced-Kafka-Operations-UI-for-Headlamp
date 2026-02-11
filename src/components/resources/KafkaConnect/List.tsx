@@ -87,10 +87,10 @@ export const KafkaConnectList: React.FC = () => {
                     <Chip label={connect.metadata.namespace} size="small" variant="outlined" style={styles.mono} />
                   </TableCell>
                   <TableCell style={styles.cell}>
-                    <Typography style={{ ...styles.mono, fontSize: '0.75rem' }}>{connect.spec.bootstrapServers}</Typography>
+                    <Typography style={{ ...styles.mono, fontSize: '0.75rem' }}>{connect.spec?.bootstrapServers || '-'}</Typography>
                   </TableCell>
                   <TableCell style={styles.cell} align="center">
-                    <Typography style={styles.mono}>{connect.status?.replicas ?? 0} / {connect.spec.replicas}</Typography>
+                    <Typography style={styles.mono}>{connect.status?.replicas ?? 0} / {connect.spec?.replicas || 0}</Typography>
                   </TableCell>
                   <TableCell style={styles.cell}>
                     <StatusIndicator conditions={connect.status?.conditions} />

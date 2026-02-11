@@ -104,8 +104,8 @@ export const KafkaList: React.FC = () => {
             )}
             
             {items?.map((kafka: Kafka) => {
-              const version = kafka.spec.kafka.version || 'Default';
-              const replicas = kafka.spec.kafka.replicas;
+              const version = kafka.spec?.kafka?.version || 'Default';
+              const replicas = kafka.spec?.kafka?.replicas ?? 0;
               const clusterId = kafka.status?.clusterId;
 
               return (
@@ -134,7 +134,7 @@ export const KafkaList: React.FC = () => {
                   <TableCell style={styles.cell}>
                     <Box display="flex" alignItems="center">
                       <Typography variant="body2" style={{ marginRight: 8 }}>{version}</Typography>
-                      {kafka.spec.zookeeper && (
+                      {kafka.spec?.zookeeper && (
                          <Chip label="ZK" size="small" style={{ height: 20, fontSize: '0.65rem' }} />
                       )}
                     </Box>

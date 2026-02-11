@@ -26,7 +26,7 @@ import { getResourceStatus, getStatusColor } from '../../../utils/status';
 const client = apiFactory.getConnectorClient();
 
 export const KafkaConnectorDetails: React.FC = () => {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const { namespace = '', name = '' } = useParams<{ namespace: string; name: string }>();
   const { item: connector, loading, error, refresh } = useKafkaConnectorDetails(namespace, name);
   const [actionLoading, setActionLoading] = React.useState(false);
 
@@ -50,7 +50,7 @@ export const KafkaConnectorDetails: React.FC = () => {
 
   const status = getResourceStatus(connector.status?.conditions);
   const connectorStatus = connector.status?.connectorStatus;
-  const isPaused = connector.spec.pause === true || connectorStatus?.connector?.state === 'PAUSED';
+  const isPaused = connector.spec?.pause === true || connectorStatus?.connector?.state === 'PAUSED';
 
   return (
     <Box p={3}>
@@ -105,16 +105,16 @@ export const KafkaConnectorDetails: React.FC = () => {
               <Typography variant="subtitle2" color="textSecondary" gutterBottom>
                 CONNECTOR DETAILS
               </Typography>
-              <Box mb={2}>
-                <Typography variant="caption" color="textSecondary">Class</Typography>
-                <Typography variant="body2" style={{ fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-all' }}>
-                  {connector.spec.class}
-                </Typography>
-              </Box>
-              <Box mb={2}>
-                <Typography variant="caption" color="textSecondary">Max Tasks</Typography>
-                <Typography variant="body1" style={{ fontWeight: 600 }}>{connector.spec.tasksMax}</Typography>
-              </Box>
+                <Box mb={2}>
+                  <Typography variant="caption" color="textSecondary">Class</Typography>
+                  <Typography variant="body2" style={{ fontFamily: 'monospace', fontSize: '0.75rem', wordBreak: 'break-all' }}>
+                    {connector.spec?.class}
+                  </Typography>
+                </Box>
+                <Box mb={2}>
+                  <Typography variant="caption" color="textSecondary">Max Tasks</Typography>
+                  <Typography variant="body1" style={{ fontWeight: 600 }}>{connector.spec?.tasksMax}</Typography>
+                </Box>
               {connectorStatus?.type && (
                 <Box mb={2}>
                   <Typography variant="caption" color="textSecondary">Type</Typography>
@@ -139,16 +139,16 @@ export const KafkaConnectorDetails: React.FC = () => {
                         <Typography variant="body2" style={{ fontWeight: 'bold' }}>Task #{task.id}</Typography>
                         <Typography variant="caption" color="textSecondary" style={{ fontFamily: 'monospace' }}>Worker: {task.worker_id}</Typography>
                       </Box>
-                      <Chip 
-                        label={task.state} 
-                        size="small" 
-                        style={{ 
-                          height: 20, 
-                          fontSize: '0.65rem', 
-                          backgroundColor: getStatusColor(task.state),
-                          color: '#fff'
-                        }} 
-                      />
+                        <Chip 
+                          label={task.state} 
+                          size="small" 
+                          style={{ 
+                            height: 20, 
+                            fontSize: '0.65rem', 
+                            backgroundColor: getStatusColor(task.state as any),
+                            color: '#fff'
+                          }} 
+                        />
                     </Box>
                   )) || <Typography variant="body2" color="textSecondary">No tasks reported</Typography>}
                 </Box>
@@ -174,7 +174,7 @@ export const KafkaConnectorDetails: React.FC = () => {
               </Typography>
               <Table size="small">
                 <TableBody>
-                  {Object.entries(connector.spec.config || {}).map(([key, value]) => (
+                  {Object.entries(connector.spec?.config || {}).map(([key, value]) => (
                     <TableRow key={key}>
                       <TableCell style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: '#d32f2f' }}>{key}</TableCell>
                       <TableCell style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{String(value)}</TableCell>

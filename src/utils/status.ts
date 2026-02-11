@@ -74,3 +74,6 @@ export function parseResourceStatus(conditions?: StrimziCondition[]): StatusDeta
 export function getResourceStatus(conditions?: StrimziCondition[]): ResourceState {
   return parseResourceStatus(conditions).state;
 }
+export function getStatusColor(state: ResourceState): string {
+  return STATE_MAP[state]?.color || STATE_MAP.Unknown.color;
+}

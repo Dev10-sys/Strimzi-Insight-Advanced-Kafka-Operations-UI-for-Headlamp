@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, Grid, Typography, Box } from '@mui/material';
+import { Card, CardContent, Grid, Typography, Box } from '@material-ui/core';
 
 interface MetricItemProps {
   label: string;
@@ -20,13 +20,13 @@ const MetricItem: React.FC<MetricItemProps> = ({ label, value, unit, color }) =>
     borderRadius={1}
     minWidth={120}
   >
-    <Typography variant="caption" color="text.secondary" gutterBottom>
+    <Typography variant="caption" color="textSecondary" gutterBottom>
       {label}
     </Typography>
-    <Typography variant="h5" color={color || 'text.primary'} fontWeight="bold">
+    <Typography variant="h5" style={{ color: color || 'inherit', fontWeight: 'bold' }}>
       {value}
       {unit && (
-        <Typography component="span" variant="body2" ml={0.5} color="text.secondary">
+        <Typography component="span" variant="body2" style={{ marginLeft: 4 }} color="textSecondary">
           {unit}
         </Typography>
       )}

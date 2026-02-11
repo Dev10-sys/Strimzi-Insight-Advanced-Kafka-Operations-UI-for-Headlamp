@@ -22,7 +22,7 @@ import { getResourceStatus } from '../../../utils/status';
 import { makeKafkaUrl, getParentClusterName } from '../../../navigation/links';
 
 export const KafkaTopicDetails: React.FC = () => {
-  const { namespace, name } = useParams<{ namespace: string; name: string }>();
+  const { namespace = '', name = '' } = useParams<{ namespace: string; name: string }>();
   const { item: topic, loading, error } = useKafkaTopicDetails(namespace, name);
 
   if (loading) return <LinearProgress />;
@@ -67,7 +67,7 @@ export const KafkaTopicDetails: React.FC = () => {
                 <Typography variant="caption" color="textSecondary">Associated Cluster</Typography>
                 <Box>
                   {clusterName ? (
-                    <Link component={RouterLink} to={makeKafkaUrl(topic.metadata.namespace, clusterName)}>
+                    <Link component={RouterLink} to={makeKafkaUrl(topic.metadata.namespace || '', clusterName)}>
                       {clusterName}
                     </Link>
                   ) : <Typography variant="body2">-</Typography>}
@@ -75,11 +75,11 @@ export const KafkaTopicDetails: React.FC = () => {
               </Box>
               <Box mb={2}>
                 <Typography variant="caption" color="textSecondary">Partitions</Typography>
-                <Typography variant="body1" style={{ fontWeight: 600 }}>{topic.spec.partitions}</Typography>
+                <Typography variant="body1" style={{ fontWeight: 600 }}>{topic.spec?.partitions || '-'}</Typography>
               </Box>
               <Box mb={2}>
                 <Typography variant="caption" color="textSecondary">Replication Factor</Typography>
-                <Typography variant="body1" style={{ fontWeight: 600 }}>{topic.spec.replicas}</Typography>
+                <Typography variant="body1" style={{ fontWeight: 600 }}>{topic.spec?.replicas || '-'}</Typography>
               </Box>
             </CardContent>
           </Card>
@@ -95,7 +95,7 @@ export const KafkaTopicDetails: React.FC = () => {
             </CardContent>
           </Card>
 
-          {topic.spec.config && (
+          {topic.spec?.config && (
             <Card variant="outlined">
               <CardContent>
                 <Typography variant="subtitle2" color="textSecondary" gutterBottom>

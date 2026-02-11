@@ -89,7 +89,7 @@ export const KafkaDetails: React.FC<KafkaDetailsProps> = ({ namespace, name }) =
       {/* Primary Infrastructure Header */}
       <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
         <Box>
-          <Box display="flex" alignItems="center" gap={1} mb={0.5}>
+          <Box display="flex" alignItems="center" mb={0.5} style={{ gap: '8px' }}>
             <Typography variant="h5" style={{ fontWeight: 700, letterSpacing: '-0.02em' }}>
               {kafka.metadata?.name}
             </Typography>
@@ -99,7 +99,7 @@ export const KafkaDetails: React.FC<KafkaDetailsProps> = ({ namespace, name }) =
             ID: {kafka.status?.clusterId || 'Awaiting Provisioning'}
           </Typography>
         </Box>
-        <Box display="flex" gap={1}>
+        <Box display="flex" style={{ gap: '8px' }}>
            <FormControlLabel
             control={<Switch checked={showYaml} onChange={() => setShowYaml(!showYaml)} size="small" />}
             label={<Typography variant="caption">EXPOSE RAW</Typography>}
@@ -151,7 +151,7 @@ export const KafkaDetails: React.FC<KafkaDetailsProps> = ({ namespace, name }) =
                   {listeners.length > 0 ? listeners.map((l, i: number) => (
                     <TableRow key={i}>
                       <TableCell><Chip label={l.type} size="small" variant="outlined" style={{ height: 20, fontSize: '0.65rem' }} /></TableCell>
-                      <TableCell style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{l.bootstrapServers || '-'}</TableCell>
+                      <TableCell style={{ fontFamily: 'monospace', fontSize: '0.8rem' }}>{l.addresses?.[0]?.host || l.bootstrapServers || '-'}</TableCell>
                     </TableRow>
                   )) : (
                     <TableRow>

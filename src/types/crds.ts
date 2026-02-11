@@ -1,7 +1,7 @@
-import {
-  KubeObjectInterface,
-  KubeCondition,
-} from "@kinvolk/headlamp-plugin/lib/k8s/cluster";
+import { K8s } from "@kinvolk/headlamp-plugin/lib";
+
+type KubeObjectInterface = K8s.cluster.KubeObjectInterface;
+type KubeCondition = K8s.cluster.KubeCondition;
 
 export interface StrimziCondition extends KubeCondition {
   type: string;

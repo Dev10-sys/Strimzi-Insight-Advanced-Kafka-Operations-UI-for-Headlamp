@@ -101,7 +101,7 @@ export const KafkaConnectorList: React.FC = () => {
                   </TableCell>
                   <TableCell style={styles.cell}>
                     <Typography variant="caption" style={{ ...styles.mono, fontSize: '0.7rem' }}>
-                      {connector.spec.class.split('.').pop()}
+                      {connector.spec?.class?.split('.').pop() || '-'}
                     </Typography>
                   </TableCell>
                   <TableCell style={styles.cell} align="center">
