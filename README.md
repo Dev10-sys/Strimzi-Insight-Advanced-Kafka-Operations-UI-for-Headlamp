@@ -1,7 +1,7 @@
-# Strimzi Insight Plugin for Headlamp
+# Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp
 
-[![CI](https://github.com/LOQ/headlamp-strimzi-insight/actions/workflows/deploy.yml/badge.svg)](https://github.com/LOQ/headlamp-strimzi-insight/actions/workflows/deploy.yml)
-[![Version](https://img.shields.io/github/v/release/LOQ/headlamp-strimzi-insight)](https://github.com/LOQ/headlamp-strimzi-insight/releases)
+[![CI](https://github.com/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp/actions/workflows/deploy.yml/badge.svg)](https://github.com/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp/actions/workflows/deploy.yml)
+[![Version](https://img.shields.io/github/v/release/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp)](https://github.com/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp/releases)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 Strimzi Insight is a production-grade [Headlamp](https://kinvolk.github.io/headlamp/) plugin designed for deep visualization and operational management of Strimzi-managed Kafka clusters on Kubernetes. It transforms raw Custom Resource Definitions (CRDs) into a structured, SRE-focused control plane.
@@ -26,7 +26,7 @@ Strimzi Insight is a production-grade [Headlamp](https://kinvolk.github.io/headl
 
 1. Clone this repository into your Headlamp plugins directory or any local folder:
    ```bash
-   git clone https://github.com/LOQ/headlamp-strimzi-insight.git
+   git clone https://github.com/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp.git
    ```
 2. Build the plugin:
    ```bash

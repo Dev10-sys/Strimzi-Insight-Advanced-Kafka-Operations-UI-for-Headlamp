@@ -21,9 +21,9 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/LOQ/headlamp-strimzi-insight.git"
+    "url": "https://github.com/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp.git"
   },
-  "homepage": "https://github.com/LOQ/headlamp-strimzi-insight#readme",
+  "homepage": "https://github.com/Dev10-sys/Strimzi-Insight-Advanced-Kafka-Operations-UI-for-Headlamp#readme",
   "dependencies": {
     "@kinvolk/headlamp-plugin": "^0.7.0",
     "@material-ui/core": "^4.12.3",
